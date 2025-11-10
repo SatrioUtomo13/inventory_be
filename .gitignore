@@ -1,0 +1,52 @@
+# ===== Node.js =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===== Environment =====
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ===== Logs =====
+logs/
+*.log
+*.out
+*.err
+
+# ===== Build / Cache =====
+dist/
+build/
+coverage/
+.cache/
+.tmp/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== Editor =====
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ===== Docker =====
+/docker-compose.override.yml
+/docker-compose.dev.yml
+/.docker/
+/Dockerfile
+
+# ===== Mongoose / MongoDB =====
+/data/db/
+dump/
+
+# ===== Misc =====
+*.pid
+*.seed
+*.tgz
