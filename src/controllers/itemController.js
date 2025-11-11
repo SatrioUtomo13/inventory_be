@@ -25,7 +25,7 @@ export const createItem = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to create item", error: error.message });
   }
 };
 
@@ -51,7 +51,7 @@ export const getItems = async (req, res) => {
     res.status(200).json(items);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to get items", error: error.message });
   }
 };
 
@@ -83,7 +83,7 @@ export const updateItem = async (req, res) => {
     res.status(200).json({ message: "Item updated successfully", item });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to update item", error: error.message });
   }
 };
 
@@ -98,6 +98,6 @@ export const deleteItem = async (req, res) => {
     res.status(200).json({ message: "Item deleted successfully", item });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to delete item", error: error.message });
   }
 };

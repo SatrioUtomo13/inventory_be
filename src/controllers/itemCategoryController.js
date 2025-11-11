@@ -1,4 +1,5 @@
 import ItemCategory from "../models/itemCategoryModel.js";
+import mongoose from "mongoose";
 
 export const createItemCategory = async (req, res) => {
   try {
@@ -16,7 +17,7 @@ export const createItemCategory = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to create category", error: error.message });
   }
 };
 
@@ -28,19 +29,24 @@ export const getCategories = async (req, res) => {
 
     if (id && id !== "0") {
       // find by id
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid category ID" });
+      }
+
       categories = await ItemCategory.findById(id);
     } else {
       // find all
       categories = await ItemCategory.find();
     }
 
-    if (id && !categories)
+    if (!categories)
       return res.status(404).json({ message: "Category not found" });
 
     res.status(200).json(categories);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to get categories", error: error.message });
   }
 };
 
@@ -68,7 +74,7 @@ export const updateCategory = async (req, res) => {
       .json({ message: "Category updated successfully", category });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to update category", error: error.message });
   }
 };
 
@@ -86,6 +92,6 @@ export const deleteCategory = async (req, res) => {
       .json({ message: "Category deleted successfully", category });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to delete category", error: error.message });
   }
 };

@@ -1,4 +1,5 @@
 import Location from "../models/locationsModel.js";
+import mongoose from "mongoose";
 
 export const createLocation = async (req, res) => {
   try {
@@ -15,7 +16,7 @@ export const createLocation = async (req, res) => {
       .json({ message: "Location created successfully", location });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to create location", error: error.message });
   }
 };
 
@@ -27,6 +28,10 @@ export const getLocations = async (req, res) => {
 
     if (id && id !== "0") {
       // find by id
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid category ID" });
+      }
       locations = await Location.findById(id);
     } else {
       // find all
@@ -39,7 +44,7 @@ export const getLocations = async (req, res) => {
     res.status(200).json(locations);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to get locations", error: error.message });
   }
 };
 
@@ -48,7 +53,9 @@ export const updateLocation = async (req, res) => {
     const { id } = req.params;
     const { name, description } = req.body;
 
-    if (!id) return res.status(400).json({ message: "ID is invalid" });
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "ID is invalid" });
+    }
 
     const location = await Location.findByIdAndUpdate(
       id,
@@ -67,7 +74,7 @@ export const updateLocation = async (req, res) => {
       .json({ message: "Location updated successfully", location });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to update location", error: error.message });
   }
 };
 
@@ -85,6 +92,6 @@ export const deleteLocation = async (req, res) => {
       .json({ message: "Location deleted successfully", location });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Failed to delete location", error: error.message });
   }
 };

@@ -1,3 +1,5 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTM2ZDA4MjAzMWY2MGJmY2Y0OGQ4NiIsImlhdCI6MTc2Mjg4MDg5OCwiZXhwIjoxNzY1NDcyODk4fQ.VLx06CSQm-437EVRV06hR8K3QkjwwVIAL9Mv6i-L5Ck
+
 ### Register
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
@@ -15,4 +17,78 @@ Content-Type: application/json
 {
   "email": "rio@example.com",
   "password_hash": "mypassword"
+}
+
+### Create Item Category
+POST http://localhost:3000/api/item-categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Perkakas",
+  "description": ""
+}
+
+### Get All Item Categories
+GET http://localhost:3000/api/item-categories
+Authorization: Bearer {{token}}
+
+### Get Item Category by ID
+GET http://localhost:3000/api/item-categories?id=69136de62031f60bfcf48d8d
+Authorization: Bearer {{token}}
+
+### Update Item Category
+PUT http://localhost:3000/api/item-categories/69136f142031f60bfcf48d92
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "",
+  "description": "perkakas rumah tangga"
+}
+
+### Delete Item Category
+DELETE http://localhost:3000/api/item-categories/69136f142031f60bfcf48d92
+Authorization: Bearer {{token}}
+
+### Create Location
+POST http://localhost:3000/api/locations
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Location 2",
+  "description": ""
+}
+
+### Get All Locations
+GET http://localhost:3000/api/locations
+Authorization: Bearer {{token}}
+
+### Get Location by ID
+GET http://localhost:3000/api/locations?id=69137a4369d1fa7dc4007200
+Authorization: Bearer {{token}}
+
+### Update Location
+PUT http://localhost:3000/api/locations/69137a4369d1fa7dc4007200
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "",
+  "description": "Description for Location 2"
+}
+
+### Delete Location
+DELETE http://localhost:3000/api/locations/69137a4369d1fa7dc4007200
+Authorization: Bearer {{token}}
+
+### Create Item
+POST http://localhost:3000/api/items
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Item 1",
+  
 }
