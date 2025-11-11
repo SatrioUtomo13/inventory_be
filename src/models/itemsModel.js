@@ -20,4 +20,15 @@ const itemSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+itemSchema.pre("save", async function (next) {
+  if (!this.code) {
+    const random = Math.floor(Math.random() * 10000)
+      .toString()
+      .padStart(4, "0");
+
+    this.code = `ITEM-${random}`;
+  }
+  next();
+});
+
 export default mongoose.model("items", itemSchema);
